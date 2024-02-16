@@ -19,7 +19,6 @@
     </contributor>
     <contributor>
       <name>Andrew Dunning</name>
-      <email>andrew.dunning@utoronto.ca</email>
       <uri>https://orcid.org/0000-0003-0464-5036</uri>
     </contributor>
     <contributor>
@@ -43,6 +42,27 @@
       <term name="translator" form="verb-short">trans.</term>
       <term name="editortranslator" form="verb">edited and translated by</term>
       <term name="translator" form="short">trans.</term>
+    </terms>
+  </locale>
+  <locale xml:lang="pt-PT">
+    <terms>
+      <term name="accessed">acedido a</term>
+    </terms>
+  </locale>
+  <locale xml:lang="pt">
+    <terms>
+      <term name="editor" form="verb">editado por</term>
+      <term name="editor" form="verb-short">ed.</term>
+      <term name="container-author" form="verb">por</term>
+      <term name="translator" form="verb-short">traduzido por</term>
+      <term name="translator" form="short">trad.</term>
+      <term name="editortranslator" form="verb">editado e traduzido por</term>
+      <term name="and">e</term>
+      <term name="no date" form="long">s.d</term>
+      <term name="no date" form="short">s.d.</term>
+      <term name="in">em</term>
+      <term name="at">em</term>
+      <term name="by">por</term>
     </terms>
   </locale>
   <macro name="secondary-contributors">
@@ -196,7 +216,7 @@
     <choose>
       <if variable="title" match="none">
         <choose>
-          <if type="personal_communication" match="none">
+          <if type="personal_communication speech thesis" match="none">
             <text variable="genre" text-case="capitalize-first"/>
           </if>
         </choose>
@@ -448,12 +468,15 @@
             <date-part name="year"/>
           </date>
         </group>
+        <text variable="year-suffix"/>
       </if>
       <else-if variable="status">
         <text variable="status" text-case="capitalize-first"/>
+        <text variable="year-suffix" prefix="-"/>
       </else-if>
       <else>
         <text term="no date" form="short"/>
+        <text variable="year-suffix" prefix="-"/>
       </else>
     </choose>
   </macro>
@@ -466,12 +489,15 @@
             <date-part name="year"/>
           </date>
         </group>
+        <text variable="year-suffix"/>
       </if>
       <else-if variable="status">
         <text variable="status"/>
+        <text variable="year-suffix" prefix="-"/>
       </else-if>
       <else>
         <text term="no date" form="short"/>
+        <text variable="year-suffix" prefix="-"/>
       </else>
     </choose>
   </macro>
@@ -526,7 +552,7 @@
   </macro>
   <macro name="description">
     <choose>
-      <if type="interview">
+      <if variable="interviewer" type="interview" match="any">
         <group delimiter=". ">
           <text macro="interviewer"/>
           <text variable="medium" text-case="capitalize-first"/>
@@ -611,7 +637,7 @@
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">
         <choose>
-          <if variable="issued accessed" match="any">
+          <if variable="issued" match="any">
             <group delimiter=" ">
               <text macro="contributors-short"/>
               <text macro="date-in-text"/>
